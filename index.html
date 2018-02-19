@@ -27,9 +27,13 @@
     <p><code>fetch('http://fooscape.bar')</code></p>
     <button id="fetch-no-catch-btn">Cause a fetch unhandled promise rejection (no .catch)</button>
 
-    <h4>Fetch - Custom throw in a Promise .catch</h4>
-    <p><code>fetch('http://fooscape.bar')</code></p>
+    <h4>Fetch - Re-throw error in a Promise .catch</h4>
+    <p><code>fetch('http://fooscape.bar').catch((err) => throw err)</code></p>
     <button id="fetch-catch-btn">Cause a fetch promise rejection with .catch</button>
+
+    <h4>Fetch - Re-throw error in a Promise .catch with timeout hack</h4>
+        <p><code>fetch('http://fooscape.bar').catch(err => setTimeout(() => throw err), 0)</code></p>
+    <button id="fetch-catch-timeout-btn">Cause a fetch promise rejection with .catch and timeout</button>
 
     <h4>Unhandled Promise Rejections</h4>
     <p><code>Promise.reject(type)</code></p>

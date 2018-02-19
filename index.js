@@ -1,5 +1,5 @@
 /* global document:true Raven:true fetch:true window:true */
-/* eslint-disable no-console */
+/* eslint-disable no-console, prefer-arrow-callback */
 
 // View logs at https://sentry.io/spyscape/foo/
 Raven
@@ -16,6 +16,17 @@ function fetchCatchHandler() {
   fetch('https://fooscape.bar')
     .catch((err) => {
       throw err;
+    });
+}
+
+function fetchCatchTimeoutHandler() {
+  console.log('fetchCatchTimeoutHandler');
+  fetch('https://fooscape.bar')
+    .catch((err) => {
+      setTimeout(
+        function fetchFailTimeoutHandler() { throw err; },
+        0,
+      );
     });
 }
 
@@ -48,6 +59,9 @@ function setEventListners() {
   const fetchCatchBtn = document.getElementById('fetch-catch-btn');
   fetchCatchBtn.addEventListener('click', fetchCatchHandler);
 
+  const fetchCatchTimeoutBtn = document.getElementById('fetch-catch-timeout-btn');
+  fetchCatchTimeoutBtn.addEventListener('click', fetchCatchTimeoutHandler);
+
   const rejPromiseBtnErr = document.getElementById('rej-prom-btn-error');
   rejPromiseBtnErr.addEventListener('click', () => rejPromWith(new Error('Promise rejected with Error')));
 
@@ -62,7 +76,7 @@ function setEventListners() {
 }
 
 function init() {
-  console.log('0.0.1');
+  console.log('0.0.3');
   setEventListners();
 }
 
