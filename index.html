@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Raven / Sentry Testbed</title>
+    <style>
+      body { font-family: sans-serif }
+    </style>
+    <script src="https://cdn.ravenjs.com/3.22.3/raven.min.js" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+  </head>
+
+  <body>
+    <h1>Raven Sentry Testbed</h1>
+    <p>A minimal testbed used to experiment with capturing errors with Raven JS and sending them to Sentry</p>
+    <p>See error logs at <a href="https://sentry.io/spyscape/foo/">https://sentry.io/spyscape/foo/</a></p>
+
+    <h4>Manual Errors<h4>
+    <p><code>new Error('My error')</code></p>
+    <button id="manual-error-btn">Throw a manual error</button>
+
+    <h4>Code Error</h4>
+    <p><code>var bar = foo.baz.biz</code></p>
+    <button id="code-error-btn">Cause a code error</button>
+
+    <h4>Fetch - Unhandled Promise Rejection</h4>
+    <p><code>fetch('http://fooscape.bar')</code></p>
+    <button id="fetch-no-catch-btn">Cause a fetch unhandled promise rejection (no .catch)</button>
+  </body>
+</html>

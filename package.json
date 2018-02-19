@@ -1,0 +1,23 @@
+{
+  "name": "raven-sentry-testbed",
+  "version": "1.0.0",
+  "description": "Testbed for Raven / Sentry",
+  "main": "index.html",
+  "scripts": {
+    "lint": "eslint *.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "live-server --port=8800 --no-browser"
+  },
+  "author": "SPYSCAPE",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.18.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.6.1",
+    "live-server": "^1.2.0"
+  },
+  "dependencies": {}
+}
