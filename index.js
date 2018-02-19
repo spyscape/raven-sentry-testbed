@@ -13,7 +13,7 @@ function rejPromWith(param) {
 
 function fetchCatchHandler() {
   console.log('fetchCatchHandler');
-  fetch('http://fooscape.bar')
+  fetch('https://fooscape.bar')
     .catch((err) => {
       throw err;
     });
@@ -21,7 +21,7 @@ function fetchCatchHandler() {
 
 function fetchNoCatchHandler() {
   console.log('fetchNoCatchHandler');
-  fetch('http://fooscape.bar');
+  fetch('https://fooscape.bar');
 }
 
 function codeErrorHandler() {
@@ -62,6 +62,7 @@ function setEventListners() {
 }
 
 function init() {
+  console.log('0.0.1');
   setEventListners();
 }
 
