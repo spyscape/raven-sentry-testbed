@@ -3,7 +3,7 @@
 
 // View logs at https://sentry.io/spyscape/foo/
 Raven
-  .config('https://af626f8dda954d7e968cdc73e489624f@sentry.io/246355')
+  .config('https://69efd013394848208f5da9dbae1809c8@sentry.io/290667')
   .install();
 
 function fetchNoCatchHandler() {
