@@ -26,5 +26,15 @@
     <h4>Fetch - Unhandled Promise Rejection</h4>
     <p><code>fetch('http://fooscape.bar')</code></p>
     <button id="fetch-no-catch-btn">Cause a fetch unhandled promise rejection (no .catch)</button>
+
+    <h4>Fetch - Custom throw in a Promise .catch</h4>
+    <p><code>fetch('http://fooscape.bar')</code></p>
+    <button id="fetch-catch-btn">Cause a fetch promise rejection with .catch</button>
+
+    <h4>Unhandled Promise Rejections</h4>
+    <p><code>Promise.reject(type)</code></p>
+    <button id="rej-prom-btn-error">Reject a promise with an Error</button><br>
+    <button id="rej-prom-btn-obj">Reject a promise with an Object literal</button><br>
+    <button id="rej-prom-btn-str">Reject a promise with a String</button><br>
   </body>
 </html>

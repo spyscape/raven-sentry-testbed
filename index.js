@@ -6,7 +6,21 @@ Raven
   .config('https://69efd013394848208f5da9dbae1809c8@sentry.io/290667')
   .install();
 
+function rejPromWith(param) {
+  console.log('rejectPromiseWith: ', param);
+  Promise.reject(param);
+}
+
+function fetchCatchHandler() {
+  console.log('fetchCatchHandler');
+  fetch('http://fooscape.bar')
+    .catch((err) => {
+      throw err;
+    });
+}
+
 function fetchNoCatchHandler() {
+  console.log('fetchNoCatchHandler');
   fetch('http://fooscape.bar');
 }
 
@@ -30,14 +44,42 @@ function setEventListners() {
 
   const fetchErrorBtn = document.getElementById('fetch-no-catch-btn');
   fetchErrorBtn.addEventListener('click', fetchNoCatchHandler);
+
+  const fetchCatchBtn = document.getElementById('fetch-catch-btn');
+  fetchCatchBtn.addEventListener('click', fetchCatchHandler);
+
+  const rejPromiseBtnErr = document.getElementById('rej-prom-btn-error');
+  rejPromiseBtnErr.addEventListener('click', () => rejPromWith(new Error('Promise rejected with Error')));
+
+  const rejPromiseBtnObj = document.getElementById('rej-prom-btn-obj');
+  rejPromiseBtnObj.addEventListener('click', () => rejPromWith({ msg: 'Promise rejected with an obj lit' }));
+
+  const rejPromiseBtnStr = document.getElementById('rej-prom-btn-str');
+  rejPromiseBtnStr.addEventListener('click', () => rejPromWith('Promise rejected with a string'));
+
+  const rejPromiseBtnNull = document.getElementById('rej-prom-btn-null');
+  rejPromiseBtnNull.addEventListener('click', () => rejPromWith(null));
 }
 
 function init() {
   setEventListners();
 }
 
-window.onunhandledrejection = function rejHandler(evt) {
-  Raven.captureException(evt.reason);
+window.onunhandledrejection = function rejPromHandler(rejEvent) {
+  if (rejEvent.reason instanceof Error) {
+    console.log('rejEvent.reason is Error');
+    Raven.captureException(rejEvent.reason);
+    return undefined;
+  }
+
+  if (typeof rejEvent.reason === 'object') {
+    console.log('rejEvent.reason is object');
+    Raven.captureException(JSON.stringify(rejEvent.reason));
+    return undefined;
+  }
+
+  Raven.captureException(rejEvent.reason);
+  return undefined;
 };
 
 document.addEventListener('DOMContentLoaded', init);
